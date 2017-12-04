@@ -37,7 +37,7 @@ public class Query {
 			stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery(  
 				//"SELECT name FROM geonames where country_code = \""+ query + "\" " );
-				"SELECT name FROM geonames where country_code = \"US\" " );
+				"SELECT name FROM geonames where country_code = \"IN\" " );
 			while(rs.next()) {
 				
 				//ret[i] = rs.getString("name");

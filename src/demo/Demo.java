@@ -30,6 +30,7 @@ import java.util.StringJoiner;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
+import java.util.Arrays;
 /**
  *
  * @author arun
@@ -93,7 +94,7 @@ public class Demo extends Application {
 		al = sql.getCountryIso(str);
 	
 		String[] places = al.toArray(new String[al.size()]);	
-		
+		Arrays.sort(places);
 		for(int i=0;i<places.length;i++)	
 			pla.getItems().add(places[i]);
 		
