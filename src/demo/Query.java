@@ -28,29 +28,23 @@ public class Query {
 		Connection c = null;
 		Statement stmt = null;
 		List ar = new ArrayList();
-		String[] ret = new String[20];
+		//String[] ret = new String[ar.length];
 		StringJoiner sj = new StringJoiner(",");
-		int i=-1;
+		int i=0;
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:test.db");
 			stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery(  
 				//"SELECT name FROM geonames where country_code = \""+ query + "\" " );
-				"SELECT name FROM geonames where country_code = \"IN\" " );
-			while(rs.next() && i< 10) {
+				"SELECT name FROM geonames where country_code = \"US\" " );
+			while(rs.next()) {
+				
+				//ret[i] = rs.getString("name");
+				ar.add(rs.getString("name"));
 				i++;
-				//ret = ret + rs.getString("name");
-				//ret=ret + sj.add(rs.getString("name")).toString(); /*Really Function Here*/
-				ret[i] = rs.getString("name");
-				//ar.add(sj.add(rs.getString("name")));
-				ar.add(ret[i]);
-				System.out.println(ret[i]);
-				//return ar;
 				
 			}
-				
-						
 			
 		} 
 		catch ( Exception e ) {
