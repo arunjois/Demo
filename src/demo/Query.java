@@ -1,6 +1,9 @@
 package demo;
 
 import java.sql.*;
+import java.util.StringJoiner;
+import java.util.List;
+import java.util.ArrayList;
 public class Query {
 	
 	public static void main(String args[]) {
@@ -19,14 +22,15 @@ public class Query {
 		
 		
 	}
-	String getCountryIso(String query)
+	List getCountryIso(String query)
 	{
 		ResultSet set;
 		Connection c = null;
-		Statement stmt = null;		
-		String ret = new String();
-		ret = "";
-		int i=0;
+		Statement stmt = null;
+		List ar = new ArrayList();
+		String[] ret = new String[20];
+		StringJoiner sj = new StringJoiner(",");
+		int i=-1;
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:test.db");
@@ -36,8 +40,14 @@ public class Query {
 				"SELECT name FROM geonames where country_code = \"IN\" " );
 			while(rs.next() && i< 10) {
 				i++;
-				ret = ret + rs.getString("name") + ",";
-				//System.out.println(ret);
+				//ret = ret + rs.getString("name");
+				//ret=ret + sj.add(rs.getString("name")).toString(); /*Really Function Here*/
+				ret[i] = rs.getString("name");
+				//ar.add(sj.add(rs.getString("name")));
+				ar.add(ret[i]);
+				System.out.println(ret[i]);
+				//return ar;
+				
 			}
 				
 						
@@ -47,7 +57,7 @@ public class Query {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		System.exit(0);
 		}
-		System.out.println(ret);
-		return ret;
+		return ar;
+		
 	}
 }

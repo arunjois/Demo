@@ -25,6 +25,11 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.stage.Stage;
 
+
+import java.util.StringJoiner;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.String;
 /**
  *
  * @author arun
@@ -36,6 +41,8 @@ public class Demo extends Application {
 		BorderPane pane = new BorderPane();
 		GridPane grid = new GridPane();
 		VBox box = new VBox();
+		StringJoiner sj = new StringJoiner(",");
+		
 		pane.setCenter(grid);
 		pane.setBottom(box);
 		grid.setVgap(10);
@@ -79,11 +86,16 @@ public class Demo extends Application {
 		con.setVisibleRowCount(20);	
 		
 		Query sql = new Query();
-		String str = (con.getSelectionModel().selectedItemProperty().toString());
+		String str = con.getSelectionModel().selectedItemProperty().toString();
 		sql.getCountryIso(con.getSelectionModel().selectedItemProperty().toString());
-		//String temp = new String();
-		//temp = sql.getCountryIso(str);
-		pla.getItems().add(sql.getCountryIso(str) );
+		String temp = new String();
+		List<String> al = new ArrayList<String>();
+		al = sql.getCountryIso(str);
+	
+		String[] places = al.toArray(new String[al.size()]);	
+		
+		for(int i=0;i<places.length;i++)	
+			pla.getItems().add(places[i]);
 		
 		
 		
